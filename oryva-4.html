@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>ORYVA – Trading Signals</title>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1176150371107587');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1176150371107587&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{
+    width:100%;height:100%;overflow:hidden;
+    background:#060d1f;
+    font-family:'Rajdhani',sans-serif;
+    color:#fff;
+  }
+
+  /* full-screen container */
+  .screen{
+    width:100vw;height:100vh;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:space-evenly;
+    padding:16px 18px;
+    position:relative;
+    background:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(0,220,255,.10) 0%,transparent 70%),
+               radial-gradient(ellipse 70% 40% at 50% 100%,rgba(0,255,160,.06) 0%,transparent 70%),
+               #060d1f;
+  }
+
+  /* subtle grid */
+  .screen::before{
+    content:'';position:absolute;inset:0;
+    background-image:linear-gradient(rgba(0,220,255,.03) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(0,220,255,.03) 1px,transparent 1px);
+    background-size:36px 36px;pointer-events:none;
+  }
+
+  /* ── LOGO CIRCLE ── */
+  .logo-wrap{
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+  }
+  .logo-ring{
+    width:72px;height:72px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#00dcff,#00ffa3);
+    padding:3px;
+    box-shadow:0 0 24px rgba(0,220,255,.5),0 0 50px rgba(0,220,255,.2);
+    animation:ringPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes ringPulse{
+    0%,100%{box-shadow:0 0 24px rgba(0,220,255,.5),0 0 50px rgba(0,220,255,.2);}
+    50%{box-shadow:0 0 36px rgba(0,220,255,.9),0 0 70px rgba(0,220,255,.35);}
+  }
+  .logo-inner{
+    width:100%;height:100%;
+    border-radius:50%;
+    background:#060d1f;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Orbitron',monospace;
+    font-size:20px;font-weight:900;
+    background:linear-gradient(135deg,#00dcff,#00ffa3);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .brand-name{
+    font-family:'Orbitron',monospace;
+    font-size:clamp(22px,7vw,30px);
+    font-weight:900;
+    background:linear-gradient(90deg,#00dcff,#00ffa3);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    letter-spacing:4px;
+  }
+  .tagline{
+    font-size:12px;color:rgba(255,255,255,.45);
+    letter-spacing:2px;text-transform:uppercase;
+    margin-top:2px;
+  }
+  .badges{
+    display:flex;gap:8px;margin-top:6px;
+  }
+  .badge{
+    padding:4px 12px;border-radius:50px;
+    font-size:11px;font-weight:700;letter-spacing:1px;
+    border:1px solid rgba(0,220,255,.35);
+    color:#00dcff;background:rgba(0,220,255,.07);
+  }
+
+  /* ── CARDS ── */
+  .cards{width:100%;display:flex;flex-direction:column;gap:10px;}
+  .card{
+    display:flex;align-items:center;gap:13px;
+    padding:12px 16px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(0,220,255,.12);
+    border-radius:14px;
+    position:relative;overflow:hidden;
+    transition:border-color .2s;
+  }
+  .card::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:linear-gradient(180deg,#00dcff,#00ffa3);
+    border-radius:3px 0 0 3px;
+  }
+  .card-icon{
+    font-size:22px;
+    width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:10px;flex-shrink:0;
+  }
+  .c1{background:rgba(0,220,255,.12);}
+  .c2{background:rgba(0,255,163,.10);}
+  .c3{background:rgba(201,168,76,.10);}
+  .card-text h3{font-size:14px;font-weight:700;color:#fff;letter-spacing:.3px;}
+  .card-text p{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px;line-height:1.4;}
+
+  /* ── JOIN BUTTON ── */
+  .join-btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    width:100%;padding:15px 20px;
+    border-radius:14px;
+    font-family:'Rajdhani',sans-serif;
+    font-size:17px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+    color:#000;text-decoration:none;
+    background:linear-gradient(90deg,#00dcff 0%,#00ffa3 100%);
+    border:none;cursor:pointer;
+    box-shadow:0 0 28px rgba(0,220,255,.55),0 0 60px rgba(0,220,255,.2);
+    animation:btnGlow 2.4s ease-in-out infinite;
+    position:relative;overflow:hidden;
+  }
+  .join-btn::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%);
+    animation:shine 2.4s ease-in-out infinite;
+  }
+  @keyframes shine{0%{transform:translateX(-100%);}60%,100%{transform:translateX(200%);}}
+  @keyframes btnGlow{
+    0%,100%{box-shadow:0 0 28px rgba(0,220,255,.55),0 0 60px rgba(0,220,255,.2);}
+    50%{box-shadow:0 0 44px rgba(0,220,255,.9),0 0 90px rgba(0,220,255,.35);}
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-wrap{
+    text-align:center;
+  }
+  .countdown-wrap p{
+    font-size:11px;color:rgba(255,255,255,.35);
+    letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;
+  }
+  .timer-bar-bg{
+    width:100%;max-width:280px;height:4px;
+    background:rgba(255,255,255,.08);border-radius:4px;margin:0 auto;overflow:hidden;
+  }
+  .timer-bar{
+    height:100%;border-radius:4px;
+    background:linear-gradient(90deg,#00dcff,#00ffa3);
+    width:100%;
+    transition:width 1s linear;
+  }
+  .timer-num{
+    font-family:'Orbitron',monospace;
+    font-size:13px;font-weight:700;
+    color:#00dcff;margin-top:4px;letter-spacing:2px;
+  }
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <!-- BRAND -->
+  <div class="logo-wrap">
+    <div class="logo-ring">
+      <div class="logo-inner">O</div>
+    </div>
+    <div class="brand-name">ORYVA</div>
+    <div class="tagline">Expert Trading Signals</div>
+    <div class="badges">
+      <span class="badge">✓ 95% Accuracy</span>
+      <span class="badge">Free Trial</span>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon c1">📈</div>
+      <div class="card-text">
+        <h3>Market Insights & Signals</h3>
+        <p>Real-time calls — Stock, Commodity & Futures</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon c2">📚</div>
+      <div class="card-text">
+        <h3>Learn Trading Strategies</h3>
+        <p>Investment | Share Market | Options guidance</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon c3">⚡</div>
+      <div class="card-text">
+        <h3>10 Days Free Trial</h3>
+        <p>Min. ₹50k capital · Entry, Target & Stop-loss</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <!-- ✏️ Replace YOURNUMBER with your WhatsApp number e.g. 919876543210 -->
+  <a class="join-btn" id="waBtn"
+     href="https://wa.me/message/DBA44JU5MYLPH1"
+     onclick="window.location.href='https://wa.me/message/DBA44JU5MYLPH1';return false;">
+    📲 &nbsp;JOIN FREE TRIAL NOW
+  </a>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-wrap">
+    <p>Auto-redirecting to WhatsApp in</p>
+    <div class="timer-bar-bg">
+      <div class="timer-bar" id="timerBar"></div>
+    </div>
+    <div class="timer-num" id="timerNum">50s</div>
+  </div>
+
+</div>
+
+<script>
+  const TOTAL = 50;
+  const WA_URL = "https://wa.me/message/DBA44JU5MYLPH1";
+  // ✏️ Replace YOURNUMBER above (both places) with your number incl. country code
+
+  let left = TOTAL;
+  const bar  = document.getElementById('timerBar');
+  const num  = document.getElementById('timerNum');
+
+  function tick(){
+    left--;
+    num.textContent = left + 's';
+    bar.style.width = (left / TOTAL * 100) + '%';
+    if(left <= 0){
+      clearInterval(timer);
+      window.location.replace(WA_URL);
+    }
+  }
+  const timer = setInterval(tick, 1000);
+</script>
+</body>
+</html>
